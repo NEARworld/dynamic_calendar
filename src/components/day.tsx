@@ -1,12 +1,9 @@
 import { FC, useState } from "react";
-import { RowProps } from "./row";
+import { FillGreyColorToDate, RowProps } from "./row";
 
 type DayProps = {
-  day: number;
-  fillGreyColorToDate: (
-    day: number,
-    hovered: boolean,
-  ) => { color: string } | undefined;
+  day: RowProps["days"][number];
+  fillGreyColorToDate: FillGreyColorToDate;
 } & Pick<RowProps, "nth" | "setClickedNthRow">;
 
 export const Day: FC<DayProps> = ({
@@ -21,7 +18,7 @@ export const Day: FC<DayProps> = ({
     if (typeof day === "number")
       return {
         color: hovered ? "white" : "black",
-        backgroundColor: hovered ? "dodgerblue" : "transparent",
+        backgroundColor: hovered ? "Wheat" : "transparent",
         cursor: hovered ? "pointer" : "none",
       };
     return null;
@@ -34,7 +31,6 @@ export const Day: FC<DayProps> = ({
         height: "100%",
         border: "none",
         display: "flex",
-        overflow: "hidden",
         alignItems: "center",
         justifyContent: "center",
         ...controlHoverEffect(),

@@ -93,13 +93,14 @@ function App() {
     [],
   );
 
-  console.log(clickedNthRow);
   return (
     <div
       style={{
         display: "grid",
-        height: clickedNthRow ? `${2 * ROW_HEIGHT}px` : `${7 * ROW_HEIGHT}px`,
+        width: `${7 * ROW_HEIGHT}px`,
+        backgroundColor: "white",
         transition: "0.5s, height ease-in-out 0.5s",
+        height: clickedNthRow ? `${2 * ROW_HEIGHT}px` : `${7 * ROW_HEIGHT}px`,
       }}
     >
       <Row

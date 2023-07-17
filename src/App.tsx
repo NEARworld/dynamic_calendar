@@ -114,14 +114,14 @@ function App() {
     >
       <Row
         nth={0}
-        days={days}
+        dates={days}
         clickedDate={clickedDate}
         setClickedDate={setClickedDate}
       />
-      {rows.map((days, idx) => (
+      {rows.map((dates, idx) => (
         <Row
           key={idx}
-          days={days}
+          dates={dates}
           nth={idx + 1}
           clickedDate={clickedDate}
           setClickedDate={setClickedDate}

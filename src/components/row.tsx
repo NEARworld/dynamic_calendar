@@ -4,14 +4,14 @@ import { Day } from "./day.jsx";
 import { ClickedDate, Days, ROW_HEIGHT } from "../App";
 
 export type RowProps = {
-  days: Days;
+  dates: Days;
   nth: number;
   clickedDate: ClickedDate;
   setClickedDate: (value: ClickedDate) => void;
 };
 
 export const Row: FC<RowProps> = ({
-  days,
+  dates,
   nth,
   clickedDate,
   setClickedDate,
@@ -26,7 +26,7 @@ export const Row: FC<RowProps> = ({
   const controlBackgroundColor = () => {
     if (isCurrentRowActive) return "#edf2f7";
 
-    if (typeof days[0] === "string") return "lightsteelblue";
+    if (typeof dates[0] === "string") return "lightsteelblue";
     return "white";
   };
 
@@ -40,16 +40,16 @@ export const Row: FC<RowProps> = ({
         justifyItems: "stretch",
         transform: controlTransform(),
         gridTemplateColumns: "repeat(7, 1fr)",
-        width: `${days.length * ROW_HEIGHT}px`,
+        width: `${dates.length * ROW_HEIGHT}px`,
         backgroundColor: controlBackgroundColor(),
-        zIndex: isCurrentRowActive ? 10 : days.length - nth,
+        zIndex: isCurrentRowActive ? 10 : dates.length - nth,
       }}
     >
-      {days.map((day, idx) => (
+      {dates.map((date, idx) => (
         <div key={idx} style={{ aspectRatio: 1 }}>
           <Day
             nth={nth}
-            day={day}
+            day={date}
             clickedDate={clickedDate}
             setClickedDate={setClickedDate}
           />

@@ -3,7 +3,7 @@ import { RowProps } from "./row";
 import { ClickedDate } from "../App";
 
 type DayProps = {
-  day: RowProps["days"][number];
+  day: RowProps["dates"][number];
   clickedDate: ClickedDate;
   setClickedDate: (value: ClickedDate) => void;
 } & Pick<RowProps, "nth">;

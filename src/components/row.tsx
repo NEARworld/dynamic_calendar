@@ -27,8 +27,9 @@ export const Row: FC<RowProps> = ({
     const lightGrey = { color: "lightgrey" };
     if (hovered) return undefined;
     if (typeof day === "number") {
-      if (nth === 0 && day >= 22) return lightGrey;
-      if (nth === 5 && day <= 7) return lightGrey;
+      if (nth === 1 && day >= 23) return lightGrey;
+      if (nth === 5 && day <= 3) return lightGrey;
+      if (nth === 6 && day <= 7) return lightGrey;
     }
     return undefined;
   };

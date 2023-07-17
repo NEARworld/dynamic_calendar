@@ -83,6 +83,8 @@ const generateRowsForCalendar = (totalDates: number[]): number[][] => {
   return rows;
 };
 
+export const ROW_HEIGHT = 60;
+
 function App() {
   const [clickedNthRow, setClickedNthRow] = useState<null | number>(null);
 
@@ -91,8 +93,15 @@ function App() {
     [],
   );
 
+  console.log(clickedNthRow);
   return (
-    <div style={{ display: "grid" }}>
+    <div
+      style={{
+        display: "grid",
+        height: clickedNthRow ? `${2 * ROW_HEIGHT}px` : `${7 * ROW_HEIGHT}px`,
+        transition: "0.5s, height ease-in-out 0.5s",
+      }}
+    >
       <Row
         nth={0}
         days={days}

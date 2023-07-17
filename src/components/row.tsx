@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { Days } from "../App";
+import { Days, ROW_HEIGHT } from "../App";
 import { Day } from "./day.jsx";
 
 export type FillGreyColorToDate = (
@@ -14,8 +14,6 @@ export type RowProps = {
   clickedNthRow: number | null;
   setClickedNthRow: (nth: number | null) => void;
 };
-
-const ROW_HEIGHT = 60;
 
 export const Row: FC<RowProps> = ({
   days,

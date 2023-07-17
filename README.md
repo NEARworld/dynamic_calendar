@@ -5,7 +5,7 @@ The Calendar test project that hides weeks smoothly except a week including a pi
 
 ### Motivation
 
-Developing a React-native app with ex co-worker and needed a calendar for the app. To implement the calendar, decided to use a calendar library but it was not suitable to satisfy how the calendar should work on the app.  This project is built on React and Typescript to test the calendar which will be implemented in React-native later.
+Developing a React-native app with ex co-worker and needed a calendar for the app. To implement the calendar, decided to use a custom calendar but it was not suitable to satisfy how the calendar should work on the app.  This project is built on React and Typescript to test the calendar which will be implemented in React-native later.
 
 ### Deployed URL
 https://nearworld.github.io/dynamic_calendar/

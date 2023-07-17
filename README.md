@@ -1,7 +1,7 @@
 # Dynamic Calendar
 
 ### Description
-The Calendar library that hides weeks smoothly except a week including a picked date.
+The Calendar test project that hides weeks smoothly except a week including a picked date.
 
 ### Motivation
 

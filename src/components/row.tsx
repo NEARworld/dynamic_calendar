@@ -1,58 +1,48 @@
 import { FC } from "react";
 
-import { Days, ROW_HEIGHT } from "../App";
 import { Day } from "./day.jsx";
-
-export type FillGreyColorToDate = (
-  day: Days[number],
-  hovered: boolean,
-) => { color: string } | undefined;
+import { ClickedDate, Days, ROW_HEIGHT } from "../App";
 
 export type RowProps = {
   days: Days;
   nth: number;
-  clickedNthRow: number | null;
-  setClickedNthRow: (nth: number | null) => void;
+  clickedDate: ClickedDate;
+  setClickedDate: (value: ClickedDate) => void;
 };
 
 export const Row: FC<RowProps> = ({
   days,
   nth,
-  clickedNthRow,
-  setClickedNthRow,
+  clickedDate,
+  setClickedDate,
 }) => {
-  const fillGreyColorToDate: FillGreyColorToDate = (day, hovered) => {
-    const lightGrey = { color: "lightgrey" };
-    if (hovered) return undefined;
-    if (typeof day === "number") {
-      if (nth === 1 && day >= 23) return lightGrey;
-      if (nth === 5 && day <= 3) return lightGrey;
-      if (nth === 6 && day <= 7) return lightGrey;
-    }
-    return undefined;
-  };
+  const isCurrentRowActive = clickedDate?.nth === nth;
 
   const controlTransform = () => {
-    if (clickedNthRow === nth)
-      return `translateY(-${(nth - 1) * ROW_HEIGHT}px)`;
-    else if (clickedNthRow) return `translateY(-${nth * ROW_HEIGHT}px)`;
-    else return undefined;
+    if (isCurrentRowActive) return `translateY(-${(nth - 1) * ROW_HEIGHT}px)`;
+    else if (clickedDate?.nth) return `translateY(-${nth * ROW_HEIGHT}px)`;
+    return undefined;
+  };
+  const controlBackgroundColor = () => {
+    if (isCurrentRowActive) return "#edf2f7";
+
+    if (typeof days[0] === "string") return "lightsteelblue";
+    return "white";
   };
 
   return (
     <div
       style={{
-        transition:
-          clickedNthRow === nth
-            ? "0.5s, all ease-in-out 0.5s"
-            : "0.5s, all ease-in 0.5s",
+        transition: isCurrentRowActive
+          ? "0.5s, all ease-in-out 0.5s"
+          : "0.5s, all ease-in-out 0.5s",
         display: "grid",
         justifyItems: "stretch",
         transform: controlTransform(),
-        width: `${days.length * ROW_HEIGHT}px`,
         gridTemplateColumns: "repeat(7, 1fr)",
-        zIndex: clickedNthRow === nth ? 10 : days.length - nth,
-        backgroundColor: clickedNthRow === nth ? "FloralWhite" : "GhostWhite",
+        width: `${days.length * ROW_HEIGHT}px`,
+        backgroundColor: controlBackgroundColor(),
+        zIndex: isCurrentRowActive ? 10 : days.length - nth,
       }}
     >
       {days.map((day, idx) => (
@@ -60,8 +50,8 @@ export const Row: FC<RowProps> = ({
           <Day
             nth={nth}
             day={day}
-            setClickedNthRow={setClickedNthRow}
-            fillGreyColorToDate={fillGreyColorToDate}
+            clickedDate={clickedDate}
+            setClickedDate={setClickedDate}
           />
         </div>
       ))}

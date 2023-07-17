@@ -1,27 +1,40 @@
 import { FC, useState } from "react";
-import { FillGreyColorToDate, RowProps } from "./row";
+import { RowProps } from "./row";
+import { ClickedDate } from "../App";
 
 type DayProps = {
   day: RowProps["days"][number];
-  fillGreyColorToDate: FillGreyColorToDate;
-} & Pick<RowProps, "nth" | "setClickedNthRow">;
+  clickedDate: ClickedDate;
+  setClickedDate: (value: ClickedDate) => void;
+} & Pick<RowProps, "nth">;
 
 export const Day: FC<DayProps> = ({
   nth,
   day,
-  setClickedNthRow,
-  fillGreyColorToDate,
+  clickedDate,
+  setClickedDate,
 }) => {
   const [hovered, setHovered] = useState(false);
+  const isCurrentDateClicked =
+    nth === clickedDate?.nth && clickedDate.date === day;
 
-  const controlHoverEffect = () => {
-    if (typeof day === "number")
-      return {
-        color: hovered ? "white" : "black",
-        backgroundColor: hovered ? "Wheat" : "transparent",
-        cursor: hovered ? "pointer" : "none",
-      };
+  const controlTextColor = () => {
+    const lightGrey = { color: "lightgrey" };
+
+    if (typeof day === "number") {
+      if (hovered || isCurrentDateClicked) return { color: "white" };
+      // grey text color if the date is not the date of this month.
+      if (nth === 1 && day >= 23) return lightGrey;
+      if (nth === 5 && day <= 3) return lightGrey;
+      if (nth === 6 && day <= 7) return lightGrey;
+    }
     return null;
+  };
+  const controlSpanBackgroundColor = () => {
+    const bgColor = "royalblue";
+    if (typeof day === "number" && hovered) return bgColor;
+    if (isCurrentDateClicked) return bgColor;
+    return undefined;
   };
 
   return (
@@ -33,17 +46,31 @@ export const Day: FC<DayProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        ...controlHoverEffect(),
-        ...fillGreyColorToDate(day, hovered),
+        backgroundColor: "transparent",
+        cursor: hovered ? "pointer" : "none",
+        ...controlTextColor(),
       }}
       onClick={() => {
-        !nth && setClickedNthRow(null);
-        nth && setClickedNthRow(nth);
+        !nth && setClickedDate(undefined);
+        nth && setClickedDate({ nth, date: day });
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {day}
+      <span
+        style={{
+          width: "100%",
+          aspectRatio: 1,
+          display: "flex",
+          borderRadius: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: controlSpanBackgroundColor(),
+          transition: "0.5s, backgroundColor ease-in-out 0.5s",
+        }}
+      >
+        {day}
+      </span>
     </button>
   );
 };

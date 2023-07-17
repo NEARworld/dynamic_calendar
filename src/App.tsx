@@ -4,6 +4,12 @@ import { Row } from "./components/row";
 import "./App.css";
 
 export type Days = (string | number)[];
+export type ClickedDate =
+  | {
+      nth: number;
+      date: string | number | null;
+    }
+  | undefined;
 
 const date = new Date();
 const days: Days = "일월화수목금토".split("");
@@ -86,7 +92,7 @@ const generateRowsForCalendar = (totalDates: number[]): number[][] => {
 export const ROW_HEIGHT = 60;
 
 function App() {
-  const [clickedNthRow, setClickedNthRow] = useState<null | number>(null);
+  const [clickedDate, setClickedDate] = useState<ClickedDate>();
 
   const rows: Days[] = useMemo(
     () => generateRowsForCalendar(totalDatesShownInThisMonth),
@@ -97,25 +103,28 @@ function App() {
     <div
       style={{
         display: "grid",
-        width: `${7 * ROW_HEIGHT}px`,
+        marginTop: "100px",
         backgroundColor: "white",
+        width: `${7 * ROW_HEIGHT}px`,
         transition: "0.5s, height ease-in-out 0.5s",
-        height: clickedNthRow ? `${2 * ROW_HEIGHT}px` : `${7 * ROW_HEIGHT}px`,
+        height: clickedDate?.nth
+          ? `${2 * ROW_HEIGHT}px`
+          : `${7 * ROW_HEIGHT}px`,
       }}
     >
       <Row
         nth={0}
         days={days}
-        clickedNthRow={clickedNthRow}
-        setClickedNthRow={setClickedNthRow}
+        clickedDate={clickedDate}
+        setClickedDate={setClickedDate}
       />
       {rows.map((days, idx) => (
         <Row
           key={idx}
           days={days}
           nth={idx + 1}
-          clickedNthRow={clickedNthRow}
-          setClickedNthRow={setClickedNthRow}
+          clickedDate={clickedDate}
+          setClickedDate={setClickedDate}
         />
       ))}
     </div>

@@ -9,7 +9,7 @@ Developing a React-native app with ex co-worker and needed a calendar for the ap
 
 ### Preview
 
-![dynamic_calendar](https://github.com/NEARworld/dynamic_calendar/assets/102969108/9e7b8954-a977-4531-ad7e-227e190684d1)
+![dynamic_calendar](https://github.com/NEARworld/dynamic_calendar/assets/102969108/5d9d7472-e215-4da9-b5a0-d7cd201e7970)
 
 ### Implemented in
 - React (Vite)
@@ -18,4 +18,4 @@ Developing a React-native app with ex co-worker and needed a calendar for the ap
 ### progress
 - [x] ~~Calculate dates of this month shown on Calendar~~
 - [x] ~~Transition effects on Row components~~
-- [ ] Full rounded color picker on hovered date 
+- [x] ~~Full rounded color picker on hovered date~~

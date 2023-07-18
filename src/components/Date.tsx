@@ -1,14 +1,15 @@
 import { FC, useState } from "react";
-import { RowProps } from "./row";
+
+import { RowProps } from "./Row";
 import { ClickedDate } from "../App";
 
-type DayProps = {
+type DateProps = {
   day: RowProps["dates"][number];
   clickedDate: ClickedDate;
   setClickedDate: (value: ClickedDate) => void;
 } & Pick<RowProps, "nth">;
 
-export const Day: FC<DayProps> = ({
+export const Date: FC<DateProps> = ({
   nth,
   day,
   clickedDate,

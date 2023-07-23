@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
 import { RowProps } from "./Row";
-import { ClickedDate } from "../App";
+import { ClickedDate } from "../date.config";
 
 type DateProps = {
   day: RowProps["dates"][number];

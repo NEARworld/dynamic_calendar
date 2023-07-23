@@ -5,7 +5,7 @@ import { ClickedDate, monthConfig } from "../date.config";
 
 export const ROW_HEIGHT = 60;
 
-export const Calendar = () => {
+const Body = () => {
   const [clickedDate, setClickedDate] = useState<ClickedDate>();
 
   const { days, rows } = useMemo(() => monthConfig(), []);
@@ -14,7 +14,7 @@ export const Calendar = () => {
     <div
       style={{
         display: "grid",
-        marginTop: "100px",
+        marginTop: "10px",
         backgroundColor: "white",
         width: `${7 * ROW_HEIGHT}px`,
         transition: "0.5s, height ease-in-out 0.5s",
@@ -40,4 +40,35 @@ export const Calendar = () => {
       ))}
     </div>
   );
+};
+
+const TopBar = () => {
+  const buttonStyle = {
+    borderRadius: "100%",
+    border: "none",
+    width: "35px",
+    aspectRatio: 1,
+    cursor: "pointer",
+  };
+
+  return (
+    <header
+      style={{
+        color: "white",
+        display: "flex",
+        marginTop: "10px",
+        justifyContent: "space-between",
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
+      }}
+    >
+      <button style={buttonStyle}>{"<"}</button>
+      <div></div>
+      <button style={buttonStyle}>{">"}</button>
+    </header>
+  );
+};
+
+export const Calendar = {
+  Body,
+  TopBar,
 };

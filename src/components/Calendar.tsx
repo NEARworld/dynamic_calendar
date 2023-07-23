@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Row } from "./Row";
 import { ClickedDate, monthConfig } from "../date.config";
@@ -43,12 +43,38 @@ const Body = () => {
 };
 
 const TopBar = () => {
+  const [currentDate, setCurrentDate] = useState({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+  });
+
+  useEffect(() => {
+    console.log(currentDate);
+  }, [currentDate]);
+
   const buttonStyle = {
     borderRadius: "100%",
     border: "none",
     width: "35px",
     aspectRatio: 1,
     cursor: "pointer",
+  };
+
+  const changeMonth = (target: "prev" | "next") => {
+    const { month } = currentDate;
+    const calculatedMonth = target === "prev" ? month - 1 : month + 1;
+
+    if (calculatedMonth < 1)
+      setCurrentDate({
+        year: currentDate.year - 1,
+        month: 12,
+      });
+    else if (calculatedMonth > 12)
+      setCurrentDate({
+        year: currentDate.year + 1,
+        month: 1,
+      });
+    else setCurrentDate({ ...currentDate, month: calculatedMonth });
   };
 
   return (
@@ -61,9 +87,13 @@ const TopBar = () => {
         backgroundColor: "rgba(255, 255, 255, 0.5)",
       }}
     >
-      <button style={buttonStyle}>{"<"}</button>
+      <button style={buttonStyle} onClick={() => changeMonth("prev")}>
+        {"<"}
+      </button>
       <div></div>
-      <button style={buttonStyle}>{">"}</button>
+      <button style={buttonStyle} onClick={() => changeMonth("next")}>
+        {">"}
+      </button>
     </header>
   );
 };

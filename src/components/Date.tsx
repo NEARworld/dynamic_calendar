@@ -27,7 +27,7 @@ export const Date: FC<DateProps> = ({
       // grey text color if the date is not the date of this month.
       if (nth === 1 && day >= 23) return lightGrey;
       if (nth === 5 && day <= 6) return lightGrey;
-      if (nth === 6 && day <= 6) return lightGrey;
+      if (nth === 6 && day <= 13) return lightGrey;
     }
     return null;
   };

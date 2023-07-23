@@ -6,40 +6,24 @@ export type ClickedDate =
     }
   | undefined;
 
-export const monthConfig = () => {
-  const date = new Date();
+export const monthConfig = (currentDate: { year: number; month: number }) => {
+  const { year, month } = currentDate;
   const days: Dates = "일월화수목금토".split("");
 
-  const firstDayOfThisMonth: number = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    1,
-  ).getDay();
-  const firstDayOfNextMonth: number = new Date(
-    date.getFullYear(),
-    date.getMonth() + 1,
-    1,
-  ).getDay();
+  const firstDayOfThisMonth: number = new Date(year, month, 1).getDay();
+  const firstDayOfNextMonth: number = new Date(year, month + 1, 1).getDay();
 
   /**
    * getDate
    * @function
    * @return {number} - today's date between 1 and 31
    */
-  const lastDate: number = new Date(
-    date.getFullYear(),
-    date.getMonth() + 1,
-    0,
-  ).getDate();
+  const lastDate: number = new Date(year, month + 1, 0).getDate();
   const datesOfThisMonth: number[] = Array.from(
     { length: lastDate },
     (_, i) => i + 1,
   );
-  const lastDateOfLastMonth: number = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    0,
-  ).getDate();
+  const lastDateOfLastMonth: number = new Date(year, month, 0).getDate();
 
   /**
    * datesOfLastMonthShownInThisMonth

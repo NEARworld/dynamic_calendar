@@ -26,8 +26,8 @@ export const Date: FC<DateProps> = ({
       if (hovered || isCurrentDateClicked) return { color: "white" };
       // grey text color if the date is not the date of this month.
       if (nth === 1 && day >= 23) return lightGrey;
-      if (nth === 5 && day <= 7) return lightGrey;
-      if (nth === 6 && day <= 7) return lightGrey;
+      if (nth === 5 && day <= 6) return lightGrey;
+      if (nth === 6 && day <= 6) return lightGrey;
     }
     return null;
   };

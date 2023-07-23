@@ -62,6 +62,7 @@ export const monthConfig = (currentDate: { year: number; month: number }) => {
   const generateRowsForCalendar = (totalDates: number[]): number[][] => {
     const rows: number[][] = [];
     for (let i = 0; i < 6; ++i) rows.push(totalDates.slice(7 * i, 7 * (i + 1)));
+    if (rows[5] && rows[5][0] === 1) rows.pop();
     return rows;
   };
 

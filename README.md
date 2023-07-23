@@ -12,7 +12,8 @@ https://nearworld.github.io/dynamic_calendar/
 
 ### Preview
 
-![dynamic_calendar](https://github.com/NEARworld/dynamic_calendar/assets/102969108/5d9d7472-e215-4da9-b5a0-d7cd201e7970)
+![dynamic-calendar](https://github.com/NEARworld/dynamic_calendar/assets/102969108/d1473cbf-3785-449b-b028-feedc1d28ea6)
+
 
 ### Implemented in
 - React (Vite)

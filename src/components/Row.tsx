@@ -1,10 +1,11 @@
 import { FC } from "react";
 
-import { Day } from "./day.jsx";
-import { ClickedDate, Days, ROW_HEIGHT } from "../App";
+import { Date } from "./Date";
+import { ROW_HEIGHT } from "./Calendar";
+import { ClickedDate, Dates } from "../date.config";
 
 export type RowProps = {
-  dates: Days;
+  dates: Dates;
   nth: number;
   clickedDate: ClickedDate;
   setClickedDate: (value: ClickedDate) => void;
@@ -47,7 +48,7 @@ export const Row: FC<RowProps> = ({
     >
       {dates.map((date, idx) => (
         <div key={idx} style={{ aspectRatio: 1 }}>
-          <Day
+          <Date
             nth={nth}
             day={date}
             clickedDate={clickedDate}

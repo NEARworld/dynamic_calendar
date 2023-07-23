@@ -19,10 +19,10 @@ export const Calendar = () => {
 
   const [currentDate, setCurrentDate] = useState<CurrentDate>({
     year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
+    month: new Date().getMonth(),
   });
 
-  const { days, rows } = useMemo(() => monthConfig(), []);
+  const { days, rows } = useMemo(() => monthConfig(currentDate), [currentDate]);
 
   return (
     <>
@@ -76,15 +76,15 @@ const TopBar: FC<TopBarPropsType> = ({ currentDate, setCurrentDate }) => {
     const { month } = currentDate;
     const calculatedMonth = target === "prev" ? month - 1 : month + 1;
 
-    if (calculatedMonth < 1)
+    if (calculatedMonth < 0)
       setCurrentDate({
         year: currentDate.year - 1,
-        month: 12,
+        month: 11,
       });
-    else if (calculatedMonth > 12)
+    else if (calculatedMonth > 11)
       setCurrentDate({
         year: currentDate.year + 1,
-        month: 1,
+        month: 0,
       });
     else setCurrentDate({ ...currentDate, month: calculatedMonth });
   };
@@ -109,7 +109,7 @@ const TopBar: FC<TopBarPropsType> = ({ currentDate, setCurrentDate }) => {
         }}
       >
         <span>
-          {currentDate.year} / {currentDate.month}
+          {currentDate.year} / {currentDate.month + 1}
         </span>
       </div>
       <button style={buttonStyle} onClick={() => changeMonth("next")}>
